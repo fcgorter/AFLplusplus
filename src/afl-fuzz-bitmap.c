@@ -708,7 +708,8 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
 
       ++afl->total_crashes;
 
-      if (afl->saved_crashes >= KEEP_UNIQUE_CRASH) { return keeping; }
+      // fcg: no limit without dedup
+      // if (afl->saved_crashes >= KEEP_UNIQUE_CRASH) { return keeping; }
 
       if (likely(!afl->non_instrumented_mode)) {
 
