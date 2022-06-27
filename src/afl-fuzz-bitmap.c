@@ -716,7 +716,10 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
 
         simplify_trace(afl, afl->fsrv.trace_bits);
 
-        if (!has_new_bits(afl, afl->virgin_crash)) { return keeping; }
+	// fcg: disable AFL coverage profile crash dedup
+        if (!has_new_bits(afl, afl->virgin_crash)) {
+		// return keeping;
+	}
 
       }
 
