@@ -698,7 +698,7 @@ void show_stats_normal(afl_state_t *afl) {
 
       sprintf(banner + banner_pad,
               "%s " cLCY VERSION cLBL " {%s} " cLGN "(%s) " cPIN "[%s] - Nyx",
-              afl->crash_mode ? cPIN "peruvian were-rabbit"
+              afl->crash_mode ? cPIN "peruvian NO-DEDUP"
                               : cYEL "american fuzzy lop",
               si, afl->use_banner, afl->power_name);
 
@@ -707,7 +707,7 @@ void show_stats_normal(afl_state_t *afl) {
 #endif
       sprintf(banner + banner_pad,
               "%s " cLCY VERSION cLBL " {%s} " cLGN "(%s) " cPIN "[%s]",
-              afl->crash_mode ? cPIN "peruvian were-rabbit"
+              afl->crash_mode ? cPIN "peruvian NO-DEDUP"
                               : cYEL "american fuzzy lop",
               si, afl->use_banner, afl->power_name);
 
