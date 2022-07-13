@@ -487,7 +487,8 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
     if (likely(!new_bits)) {
 
       if (unlikely(afl->crash_mode)) { ++afl->total_crashes; }
-      return 0;
+      	// fcg: no crash mode dedup
+	// return 0;
 
     }
 
