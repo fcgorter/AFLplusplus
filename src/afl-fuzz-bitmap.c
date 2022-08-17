@@ -485,9 +485,9 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
     new_bits = has_new_bits_unclassified(afl, afl->virgin_bits);
 
     if (likely(!new_bits)) {
-	// fcg: no dedup crash mode
-      //if (unlikely(afl->crash_mode)) { ++afl->total_crashes; }
-	// return 0;
+
+      if (unlikely(afl->crash_mode)) { ++afl->total_crashes; }
+      return 0;
 
     }
 
@@ -708,8 +708,7 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
 
       ++afl->total_crashes;
 
-      // fcg: no limit without dedup
-      // if (afl->saved_crashes >= KEEP_UNIQUE_CRASH) { return keeping; }
+      if (afl->saved_crashes >= KEEP_UNIQUE_CRASH) { return keeping; }
 
       if (likely(!afl->non_instrumented_mode)) {
 
@@ -717,10 +716,7 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
 
         simplify_trace(afl, afl->fsrv.trace_bits);
 
-	// fcg: disable AFL coverage profile crash dedup
-        if (!has_new_bits(afl, afl->virgin_crash)) {
-		// return keeping;
-	}
+        if (!has_new_bits(afl, afl->virgin_crash)) { return keeping; }
 
       }
 
